@@ -1,9 +1,10 @@
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1" isELIgnored="false"%>
+<!DOCTYPE html>
 <html>
 <head>
-<title>Leave Approval</title>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
 	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
@@ -20,17 +21,30 @@
 	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
 	integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
 	crossorigin="anonymous"></script>
-
 </head>
 <body>
-	
-	<div class="container-fluid" style="height: 100vh;background-color: black;">
-	<jsp:include page="nav.jsp"></jsp:include>
-		
+	<div class="container-fluid">
+		<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
 
 
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav mr-auto">
+					<li class="nav-item "><a class="nav-link" href="#">Home
+					</a></li>
+					<li class="nav-item"><a class="nav-link" href="popup.jsp">Apply for Leave</a></li>
+					
+					<li class="nav-item"><a class="nav-link" href="#">View Leaves</a>
+					</li>
+					<li class="nav-item"><a class="nav-link" href="register">Register</a>
+					</li>
+				</ul>
+				<form class="form-inline my-2 my-lg-0">
+					
+					<button class="btn btn-success my-2 my-sm-0" type="submit" style="margin-left:10px">Log In</button>
+				</form>
+			</div>
+		</nav>
 	</div>
-
 
 
 </body>

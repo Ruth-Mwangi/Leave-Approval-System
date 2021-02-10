@@ -9,13 +9,23 @@ public class LeaveRequest {
 	private String dateApproved;
 	private String startDate;
 	private String endDate;
-	private String status;
+	private Integer status;
 	private Integer requestedDays;
 	private String remarks;
 	
 	
+	public LeaveRequest(String employeeId, Integer approverId, Integer leaveTypeId, String startDate, String endDate,
+			Integer requestedDays) {
+		this.employeeId = employeeId;
+		this.approverId = approverId;
+		this.leaveTypeId = leaveTypeId;
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.requestedDays = requestedDays;
+	}
+
 	public LeaveRequest(String employeeId, Integer approverId, Integer leaveTypeId, String dateCreated,
-			String dateApproved, String startDate, String endDate, String status, Integer requestedDays,
+			String dateApproved, String startDate, String endDate, Integer status, Integer requestedDays,
 			String remarks) {
 		
 		
@@ -30,6 +40,7 @@ public class LeaveRequest {
 		this.requestedDays = requestedDays;
 		this.remarks = remarks;
 	}
+	
 	public Integer getId() {
 		return id;
 	}
@@ -78,10 +89,10 @@ public class LeaveRequest {
 	public void setEndDate(String endDate) {
 		this.endDate = endDate;
 	}
-	public String getStatus() {
+	public Integer getStatus() {
 		return status;
 	}
-	public void setStatus(String status) {
+	public void setStatus(Integer status) {
 		this.status = status;
 	}
 	public Integer getRequestedDays() {

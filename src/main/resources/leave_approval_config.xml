@@ -2,6 +2,12 @@
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 <!-- Set database details here -->
+<typeAliases>
+	<typeAlias type="com.jkuates.models.Employee" alias="Employee"/>
+	<typeAlias type="com.jkuates.models.Employee" alias="Approver"/>
+	<typeAlias type="com.jkuates.models.Employee" alias="LeaveRequest"/>
+	<typeAlias type="com.jkuates.models.Employee" alias="Leave"/>
+</typeAliases>
 	
    <environments default = "development">
       <environment id = "development">
@@ -16,5 +22,11 @@
          
       </environment>
    </environments>
+   <mappers>
+   	<mapper resource="employee_mapper.xml"/>
+   	<mapper resource="approver_mapper.xml"/>
+   	<mapper resource="leave_mapper.xml"/>
+   	<mapper resource="eave_request_mapper.xml"/>
+   </mappers>
 	
 </configuration>
