@@ -3,14 +3,15 @@ package com.jkuates.models;
 public class Leave {
 	private Integer id;
 	private String name;
-	private String description;
+	private String leaveDescription;
 	private Integer days;
 	
 
-	public Leave(String name, String description, Integer days) {
+	public Leave(Integer id,String name, String leaveDescription, Integer days) {
 		
+		this.id = id;
 		this.name = name;
-		this.description = description;
+		this.leaveDescription = leaveDescription;
 		this.days = days;
 	}
 	public Integer getId() {
@@ -25,11 +26,11 @@ public class Leave {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getDescription() {
-		return description;
+	public String getLeaveDescription() {
+		return leaveDescription;
 	}
-	public void setDescription(String description) {
-		this.description = description;
+	public void setLeaveDescription(String leaveDescription) {
+		this.leaveDescription = leaveDescription;
 	}
 	public Integer getDays() {
 		return days;

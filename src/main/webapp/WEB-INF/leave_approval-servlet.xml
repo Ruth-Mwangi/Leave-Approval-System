@@ -22,7 +22,9 @@
 	<!-- Configure annotation-driven -->
 
 	<bean id="employeeDao"
-		class="com.jkuates.dao.LeaveApprovalDaoImpl"></bean>
+		class="com.jkuates.dao.EmployeeDaoImpl"></bean>
+	<bean id="leaveTypeDao"
+	class="com.jkuates.dao.LeaveTypeDaoImpl"></bean>
 	
 
 

@@ -4,9 +4,9 @@
 <!-- Set database details here -->
 <typeAliases>
 	<typeAlias type="com.jkuates.models.Employee" alias="Employee"/>
-	<typeAlias type="com.jkuates.models.Employee" alias="Approver"/>
-	<typeAlias type="com.jkuates.models.Employee" alias="LeaveRequest"/>
-	<typeAlias type="com.jkuates.models.Employee" alias="Leave"/>
+	<typeAlias type="com.jkuates.models.Approver" alias="Approver"/>
+	<typeAlias type="com.jkuates.models.LeaveRequest" alias="LeaveRequest"/>
+	<typeAlias type="com.jkuates.models.Leave" alias="Leave"/>
 </typeAliases>
 	
    <environments default = "development">
@@ -24,9 +24,9 @@
    </environments>
    <mappers>
    	<mapper resource="employee_mapper.xml"/>
-   	<mapper resource="approver_mapper.xml"/>
+   	
    	<mapper resource="leave_mapper.xml"/>
-   	<mapper resource="eave_request_mapper.xml"/>
+   	
    </mappers>
 	
 </configuration>

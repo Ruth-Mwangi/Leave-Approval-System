@@ -1,4 +1,5 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1" isELIgnored="false"%>
 
@@ -26,80 +27,29 @@
 </head>
 <body>
 	<div class="container-fluid">
-	<jsp:include page="nav.jsp"></jsp:include>
-	
-	
-		<form:form action="save-employee" method="POST" modelAttribute="Employee">
-		<div class="form-row">
-				<div class="form-group col-md-6">
-					<form:label path="fname">First Name</form:label> 
-					<form:input type="text"
-						class="form-control" path="fname" name="fname" placeholder=""/>
-				</div>
-				<div class="form-group col-md-6">
-					<form:label path="lname">Last Name</form:label> <form:input type="text"
-						class="form-control" path="lname" name="lname" placeholder=""/>
-				</div>
-			</div>
-			<div class="form-row">
-				<div class="form-group col-md-6">
-					<form:label path="fname">First Name</form:label> 
-					<form:input type="text"
-						class="form-control" path="fname" name="fname" placeholder=""/>
-				</div>
-				<div class="form-group col-md-6">
-					<form:label path="lname">Last Name</form:label> <form:input type="text"
-						class="form-control" path="lname" name="lname" placeholder=""/>
-				</div>
-			</div>
-			<div class="form-row">
-				<div class="form-group col-md-6">
-					<form:label path="employeeId">Employee Id</form:label> <form:input type="text"
-						class="form-control" path="employeeId" name="employeeId" style="text-transform: uppercase"
-						placeholder=""/>
-				</div>
-				<div class="form-group col-md-6">
-					<form:label path="station">Station</form:label> <form:input type="text"
-						class="form-control" path="station" name="station" placeholder=""/>
-				</div>
-			</div>
-
-			<div class="form-row">
-				<div class="form-group col-md-6">
-					<form:label path="title">Title</form:label> <form:input type="text"
-						class="form-control" path="title" name="title"/>
-				</div>
-				<div class="form-group col-md-6">
-					<form:label path="department">Department</form:label> <form:input type="text"
-						class="form-control" path="department" name="department"
-						placeholder=""/>
-				</div>
+		<jsp:include page="nav.jsp"></jsp:include>
 
 
-			</div>
-			<div class="form-row">
-				<div class="form-group col-md-4">
-					<form:label path="gender">Gender</form:label>
-					 <form:select path="gender" name="gender"
-						class="form-control">
-						<form:option value="Female">Female</form:option>
-						<form:option value="Male">Male</form:option>
-						
-					</form:select>
-				</div>
-				<div class="form-group col-md-4">
-					<form:label path="telephone">Telephone</form:label> <form:input type="text"
-						class="form-control" path="telephone" name="telephone"
-						placeholder=""/>
-				</div>
-				<div class="form-group col-md-4">
-					<form:label path="address">Address</form:label> <form:input type="text"
-						class="form-control" path="address" name="address"
-						placeholder=""/>
-				</div>
+		<form:form action="save-employee" method="POST"
+			modelAttribute="LeaveRequest">
 
 
-			</div>
+			
+				<table >
+					<tr>
+						<c:forEach items="${leaveTypes}" var="leaveType">
+							<td style="padding-right: 20px;padding-left: 20px"><a href="apply-for-leave?
+							leaveId=${leaveType.id}&leaveName=${leaveType.name}
+							&leaveDays=${leaveType.days}"><form:radiobutton class="form-control"  path="leaveTypeId"
+							name="leaveTypeId" value="${leaveType.id}" /></a>  ${leaveType.name} </td>
+
+						</c:forEach>
+
+					</tr>
+
+				</table>
+
+			
 
 
 			<button type="submit" class="btn btn-primary">Register</button>
