@@ -38,6 +38,28 @@ public class LeaveTypeDaoImpl implements LeaveTypeDao {
 		return leave;
 	}
 
+	
+
+	@Override
+	public Leave getLeaveByName(String name) {
+		openSession();
+		Leave leave=null;
+
+		try {
+
+			leave=session.selectOne("LeaveType.getLeaveByName",name);
+			commitSession();
+			closeSession();
+			
+			
+
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			closeSession();
+		}
+		return leave;
+	}
 	private void openSession() {
 		session = LeaveApprovalUtil.getSqlSessionFactory().openSession();
 

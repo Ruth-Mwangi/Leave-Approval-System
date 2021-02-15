@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Employee">
+
+	<resultMap type='Employee' id='EmployeeResult'>
+		
+		<result column = "employeeId" property = "employeeId" />
+		<result column = "depatment" property = "department" />
+		<result column = "fname" property = "fname" />
+		<result column = "lname" property = "lname" />
+		<result column = "title" property = "title" />
+		<result column = "address" property = "address" />
+		<result column = "gender" property = "gender" />
+		<result column = "station" property = "station" />
+		<result column = "telephone" property = "telephone" />
+		
+	</resultMap>
+	<!-- Normal -->
+	<insert id="insertEmployee" parameterType="Employee">
+		INSERT INTO
+		employee (employeeId,department,fname, lname,title,address,gender,station,telephone ) VALUES
+		 (#{employeeId},#{department},#{fname},
+		#{lname}, #{title}, #{address},#{gender},#{station},#{telephone});
+	</insert>
+
+	<select id="getEmployeeById" parameterType="String" resultMap="EmployeeResult">
+		SELECT * FROM employee WHERE employeeId=#{employeeId}
+	</select>
+	
+	
+
+</mapper>

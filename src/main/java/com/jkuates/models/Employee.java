@@ -10,6 +10,16 @@ public class Employee extends User {
 	private String gender;
 	
 	
+	
+	
+	public Employee() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	public Employee(String fname, String lname) {
+		super(fname, lname);
+		// TODO Auto-generated constructor stub
+	}
 	public Employee(String fname, String lname, String title, String employeeId, String department, String telephone,
 			String station, String address,String gender) {
 		super(fname, lname, title);

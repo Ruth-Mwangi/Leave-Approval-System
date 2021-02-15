@@ -1,1 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Approver">
+
+	<resultMap type='Approver' id='ApproverResult'>
+		
+		<id property="id" column="id"/>
+		<result column = "fname" property = "fname" />
+		<result column = "lname" property = "lname" />
+		
+	</resultMap>
+	<!-- Normal -->
+	
+
+	<select id="getApprovers"  resultMap="ApproverResult">
+		SELECT fname,lname,id FROM leave_approval.approver
+	</select>
+	<select id="getApproverId"  resultType="int" parameterType="String">
+		SELECT * FROM leave_approval.approver WHERE fname=#{name}
+	</select>
+	
+	
+
+</mapper>

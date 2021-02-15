@@ -12,8 +12,21 @@ public class LeaveRequest {
 	private Integer status;
 	private Integer requestedDays;
 	private String remarks;
+	private Employee employee;
+	private Leave leaveName;
 	
 	
+	
+	
+	public LeaveRequest(String employeeId, String dateCreated, String startDate, String endDate,
+			Integer requestedDays) {
+		this.employeeId = employeeId;
+		this.dateCreated = dateCreated;
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.requestedDays = requestedDays;
+	}
+
 	public LeaveRequest(String employeeId, Integer approverId, Integer leaveTypeId, String startDate, String endDate,
 			Integer requestedDays) {
 		this.employeeId = employeeId;
@@ -62,6 +75,24 @@ public class LeaveRequest {
 		this.remarks = remarks;
 	}
 	
+	
+	
+	public Employee getEmployee() {
+		return employee;
+	}
+
+	public void setEmployee(Employee employee) {
+		this.employee = employee;
+	}
+
+	public Leave getLeaveName() {
+		return leaveName;
+	}
+
+	public void setLeaveName(Leave leaveName) {
+		this.leaveName = leaveName;
+	}
+
 	public Integer getId() {
 		return id;
 	}

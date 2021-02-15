@@ -15,7 +15,11 @@
 	<select id="getLeaveTypes" resultMap="LeaveResult">
 		SELECT * FROM leave_type 
 	</select>
+	<select id="getLeaveByName" resultMap="LeaveResult">
+		SELECT * FROM leave_type WHERE name=#{name}
+	</select>
 	
+
 	
 
 </mapper>

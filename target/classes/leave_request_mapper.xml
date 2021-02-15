@@ -1,1 +1,73 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="LeaveRequest">
+
+
+	<resultMap type='LeaveRequest' id='LeaveRequestResult'>
+
+		<result column="employeeId" property="employeeId" />
+		<result column="dateCreated" property="dateCreated" />
+		<result column="startDate" property="startDate" />
+		<result column="endDate" property="endDate" />
+		<result column="requestedDays" property="requestedDays" />
+		<association property="employee" resultMap="EmployeeMap">
+
+		</association>
+		<association property="leaveName" resultMap="LeaveMap">
+			
+
+		</association>
+
+	</resultMap>
+	<resultMap type="Employee" id="EmployeeMap">
+		<result property="fname" column="fname" />
+		<result property="lname" column="lname" />
+	</resultMap>
+	<resultMap type="Leave" id="LeaveMap">
+		<result property="name" column="name" />
+	</resultMap>
+	<!-- Normal -->
+
+	<insert id="insertLeavRequest" parameterType="LeaveRequest"
+		keyProperty='id'>
+		INSERT INTO
+		leave_approval.leave
+		(employeeId,approverId,leaveTypeId,dateCreated,startDate,endDate,status,requestedDays)
+		VALUES
+		(#{employeeId},#{approverId},#{leaveTypeId},now(),#{startDate},#{endDate},0,#{requestedDays})
+	</insert>
+
+	<select id="getDaysTaken" resultType="int"
+		parameterType="Parameters">
+		SELECT SUM(requestedDays) as sum FROM
+		leave_approval.leave where employeeId=#{employeeId}
+		and
+		year(dateApproved)=year(curdate()) and status=1 and
+		leaveTypeId=#{leaveId};
+	</select>
+
+	<select id="getLeaveRequestsForApprover"
+		resultMap="LeaveRequestResult" parameterType="int">
+		SELECT
+		l.employeeId,l.dateCreated,l.startDate,l.endDate,l.requestedDays,e.fname,e.lname,lt.name
+		FROM
+		leave_approval.leave AS l
+		INNER JOIN
+		leave_approval.employee AS e
+		ON
+		l.employeeId=e.employeeId
+		INNER JOIN
+		leave_approval.leave_type as lt
+		ON
+		l.leaveTypeId=lt.id
+		WHERE status=0
+		AND
+		approverId=#{id}
+	</select>
+
+
+
+
+
+</mapper>

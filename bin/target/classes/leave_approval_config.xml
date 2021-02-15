@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+<!-- Set database details here -->
+<typeAliases>
+	<typeAlias type="com.jkuates.models.Employee" alias="Employee"/>
+	<typeAlias type="com.jkuates.models.Approver" alias="Approver"/>
+	<typeAlias type="com.jkuates.models.LeaveRequest" alias="LeaveRequest"/>
+	<typeAlias type="com.jkuates.models.Leave" alias="Leave"/>
+</typeAliases>
+	
+   <environments default = "development">
+      <environment id = "development">
+         <transactionManager type = "JDBC"/> 
+			
+         <dataSource type = "POOLED">
+            <property name = "driver" value = "com.mysql.cj.jdbc.Driver"/>
+            <property name = "url" value = "jdbc:mysql://localhost:3306/leave_approval"/>
+            <property name = "username" value = "root"/>
+            <property name = "password" value = "admin"/>
+         </dataSource>   
+         
+      </environment>
+   </environments>
+   <mappers>
+   	<mapper resource="employee_mapper.xml"/>
+   	
+   	<mapper resource="leave_mapper.xml"/>
+   	
+   </mappers>
+	
+</configuration>

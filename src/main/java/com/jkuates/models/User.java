@@ -6,11 +6,25 @@ public class User {
 	private String title;
 	
 	
+	public User() {
+		
+	}
+
+
 	public User(String fname, String lname, String title) {
 		this.fname = fname;
 		this.lname = lname;
 		this.title = title;
 	}
+	
+	
+	public User(String fname, String lname) {
+	
+		this.fname = fname;
+		this.lname = lname;
+	}
+
+
 	public String getFname() {
 		return fname;
 	}

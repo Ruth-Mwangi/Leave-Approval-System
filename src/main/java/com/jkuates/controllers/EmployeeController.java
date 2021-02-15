@@ -51,6 +51,8 @@ public class EmployeeController {
 			mv.addObject("employeeId", employeeId);
 			mv.addObject("leaveTypes", leaveType);
 			mv.setViewName("leave.jsp");
+			request.getSession().setAttribute("employee", employee);
+			System.out.println("many employee");
 			
 		}
 		return mv;
@@ -93,5 +95,6 @@ public class EmployeeController {
 		return mv;
 		
 	}
+	
 
 }

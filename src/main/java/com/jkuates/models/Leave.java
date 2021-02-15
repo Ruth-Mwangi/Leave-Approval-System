@@ -6,6 +6,17 @@ public class Leave {
 	private String leaveDescription;
 	private Integer days;
 	
+	
+	
+
+	public Leave() {
+		
+	}
+	
+	public Leave(String name) {
+		
+		this.name = name;
+	}
 
 	public Leave(Integer id,String name, String leaveDescription, Integer days) {
 		
