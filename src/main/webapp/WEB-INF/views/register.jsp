@@ -1,4 +1,5 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1" isELIgnored="false"%>
 
@@ -26,41 +27,56 @@
 </head>
 <body>
 	<div class="container-fluid">
-	<jsp:include page="nav.jsp"></jsp:include>
-	
-		<form:form action="save-employee" method="POST" modelAttribute="Employee">
+		<jsp:include page="nav.jsp"></jsp:include>
+
+		<form:form action="save-employee" method="POST"
+			modelAttribute="Employee">
+			<div class="form-row" style="margin-top: 10px">
+
+				<c:if test="${registrationStatus == 'Failed' }">
+					<div class="form-group col-md-6">
+						<div class="alert alert-danger" role="alert">Registration
+							failed employee with that id exists!</div>
+					</div>
+
+				</c:if>
+			</div>
+
 			<div class="form-row">
 				<div class="form-group col-md-6">
-					<form:label path="fname">First Name</form:label> 
-					<form:input type="text"
-						class="form-control" path="fname" name="fname" placeholder=""/>
+					<form:label path="fname">First Name</form:label>
+					<form:input type="text" class="form-control" path="fname"
+						name="fname" placeholder="" />
 				</div>
 				<div class="form-group col-md-6">
-					<form:label path="lname">Last Name</form:label> <form:input type="text"
-						class="form-control" path="lname" name="lname" placeholder=""/>
+					<form:label path="lname">Last Name</form:label>
+					<form:input type="text" class="form-control" path="lname"
+						name="lname" placeholder="" />
 				</div>
 			</div>
 			<div class="form-row">
 				<div class="form-group col-md-6">
-					<form:label path="employeeId">Employee Id</form:label> <form:input type="text"
-						class="form-control" path="employeeId" name="employeeId" style="text-transform: uppercase"
-						placeholder=""/>
+					<form:label path="employeeId">Employee Id</form:label>
+					<form:input type="text" class="form-control" path="employeeId"
+						name="employeeId" style="text-transform: uppercase" placeholder="" />
 				</div>
 				<div class="form-group col-md-6">
-					<form:label path="station">Station</form:label> <form:input type="text"
-						class="form-control" path="station" name="station" placeholder=""/>
+					<form:label path="station">Station</form:label>
+					<form:input type="text" class="form-control" path="station"
+						name="station" placeholder="" />
 				</div>
 			</div>
 
 			<div class="form-row">
 				<div class="form-group col-md-6">
-					<form:label path="title">Title</form:label> <form:input type="text"
-						class="form-control" path="title" name="title"/>
+					<form:label path="title">Title</form:label>
+					<form:input type="text" class="form-control" path="title"
+						name="title" />
 				</div>
 				<div class="form-group col-md-6">
-					<form:label path="department">Department</form:label> <form:input type="text"
-						class="form-control" path="department" name="department"
-						placeholder=""/>
+					<form:label path="department">Department</form:label>
+					<form:input type="text" class="form-control" path="department"
+						name="department" placeholder="" />
 				</div>
 
 
@@ -68,22 +84,21 @@
 			<div class="form-row">
 				<div class="form-group col-md-4">
 					<form:label path="gender">Gender</form:label>
-					 <form:select path="gender" name="gender"
-						class="form-control">
+					<form:select path="gender" name="gender" class="form-control">
 						<form:option value="Female">Female</form:option>
 						<form:option value="Male">Male</form:option>
-						
+
 					</form:select>
 				</div>
 				<div class="form-group col-md-4">
-					<form:label path="telephone">Telephone</form:label> <form:input type="text"
-						class="form-control" path="telephone" name="telephone"
-						placeholder=""/>
+					<form:label path="telephone">Telephone</form:label>
+					<form:input type="text" class="form-control" path="telephone"
+						name="telephone" placeholder="" />
 				</div>
 				<div class="form-group col-md-4">
-					<form:label path="address">Address</form:label> <form:input type="text"
-						class="form-control" path="address" name="address"
-						placeholder=""/>
+					<form:label path="address">Address</form:label>
+					<form:input type="text" class="form-control" path="address"
+						name="address" placeholder="" />
 				</div>
 
 

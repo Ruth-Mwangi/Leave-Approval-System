@@ -1,7 +1,9 @@
 package com.jkuates.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
@@ -63,13 +65,17 @@ public class ApproverDaoImpl implements ApproverDao {
 		return approverId;
 	}
 	@Override
-	public List<LeaveRequest> getApproversRequests(int id) {
+	public List<LeaveRequest> getApproversRequests(int id,Integer status) {
 		openSession();
+		Map<String, Integer> map=new HashMap<String, Integer>();
+		map.put("approverId", id);
+		map.put("status", status);
+		
 		List<LeaveRequest> requests=new ArrayList<LeaveRequest>();
 
 		try {
 
-			requests=session.selectList("LeaveRequest.getLeaveRequestsForApprover",id);
+			requests=session.selectList("LeaveRequest.getLeaveRequestsForApprover",map);
 			System.out.println(requests.size());
 			commitSession();
 			closeSession();

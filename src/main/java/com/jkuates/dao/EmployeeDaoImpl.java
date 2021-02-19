@@ -1,5 +1,8 @@
 package com.jkuates.dao;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
@@ -72,6 +75,30 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
 	private void closeSession() {
 		session.close();
+	}
+
+	@Override
+	public Employee getEmployeeLeaveRequests(String employeeId, String status) {
+		Employee employee=null;
+		Map<String, String> map=new HashMap<String, String>();
+		map.put("employeeId", employeeId);
+		map.put("status", status);
+		openSession();
+		
+		
+		try {
+			employee=session.selectOne("LeaveRequest.getLeaveRequestsForEmployee", map);
+			commitSession();
+			closeSession();
+			
+
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			closeSession();
+		}
+
+		return employee;
 	}
 
 }

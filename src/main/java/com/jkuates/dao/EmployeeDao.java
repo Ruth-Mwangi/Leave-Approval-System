@@ -20,6 +20,8 @@ public interface EmployeeDao {
 	
 	public Employee getEmployeeById(String employeeId);
 	
+	public Employee getEmployeeLeaveRequests(String employeeId,String status);
+	
 	
 	
 	

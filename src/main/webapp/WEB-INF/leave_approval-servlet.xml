@@ -27,15 +27,11 @@
 		class="com.jkuates.dao.LeaveRequestDaoImpl"></bean>
 	<bean id="approverDao" class="com.jkuates.dao.ApproverDaoImpl"></bean>
 
-	<bean
-		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<property name="prefix">
-			<value>/WEB-INF/pages/</value>
-		</property>
-		<property name="suffix">
-			<value>.jsp</value>
-		</property>
-	</bean>
+	<bean id="jspViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+			<property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+			<property name="prefix" value="/WEB-INF/views/"/>
+			
+		</bean>
 
 	<mvc:resources mapping="/resources/**"
 		location="/resources/theme1/" cache-period="31556926" />

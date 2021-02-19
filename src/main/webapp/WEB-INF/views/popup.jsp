@@ -22,30 +22,46 @@
 	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
 	integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
 	crossorigin="anonymous"></script>
+	
+	<link href="<c:url value="/resources/css/style.css" />" rel="stylesheet">
+
+<script src="<c:url value="/resources/js/main.js" />"></script>
 </head>
 <body>
-	<div class="container-fluid">
-		<jsp:include page="nav.jsp"></jsp:include>
-		<form action="get-employee">
+<div class="loading justify-content-center" style="display: none;">
+		<div
+			style="margin: auto; text-align: center; display: flex; height: 100%; align-items: center; justify-content: center; width: 50%;">
+			<img alt="bzzzzzzzzz"
+				src='<c:url value="/resources/images/loading.gif" />'
+				style="width: 100px">
+		</div>
+
+
+	</div>
+
+	<div style="width: 50vw;" >
+		<form class="text-center" action="get-employee" style="width: 100%" onsubmit="startLoading()">
 			<div class="form-group ">
-				<label for="employee_id">Employee Id</label> <input type="text"
-					class="form-control" id="employee_id" aria-describedby="empIdHelp"
+				 <input type="text"
+					class="form-control form-rounded" id="employee_id" aria-describedby="empIdHelp"
 					name="employee_id" placeholder="Input Employee Id"
-					style="text-transform: uppercase">
+					style="text-transform: uppercase;border-radius: 1rem;">
 				<c:set var="message" value="${employeeFound}" />
 				<c:if test="${message=='Fail'}">
 					<small id="empIdHelp" class="form-text" style="color: red">Employee
-						not found! Please register. </small>
+						not found! Please ensure you are registered. </small>
 				</c:if>
 
 
 			</div>
 
-			<button type="submit" class="btn btn-primary mb-2">Go</button>
+			<button type="submit"  class="btn btn-primary mb-2">Go</button>
 		</form>
-
-
 	</div>
+
+
+
+
 
 
 

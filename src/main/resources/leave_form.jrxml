@@ -1,0 +1,448 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.16.0.final using JasperReports Library version 6.16.0-48579d909b7943b64690c65c71e07e0b80981928  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="test2" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="bd196ca5-dd96-41ba-b4da-fcc025abdcf4">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="leave_approval adapter"/>
+	<parameter name="employeeId" class="java.lang.String"/>
+	<parameter name="id" class="java.lang.Integer"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT 
+		CONCAT( e.fname," ",e.lname) AS
+		employeeName,e.employeeId,e.department,
+		e.station,e.address,e.telephone,l.id,l.startDate,
+		l.endDate,l.requestedDays,l.remarks,l.status,lt.name,
+		CONCAT(a.fname," ",a.lname) AS approverName,l.dateCreated,l.dateApproved
+		FROM 
+		leave_approval.employee AS e 
+		inner join
+		leave_approval.leave AS l ON e.employeeId=l.employeeId 
+		inner join
+		leave_approval.leave_type AS lt ON lt.id=l.leaveTypeId 
+		inner join
+		leave_approval.approver AS a ON a.id=l.approverId
+		WHERE l.employeeId= $P{employeeId} AND l.id=$P{id}]]>
+	</queryString>
+	<field name="employeeName" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="employeeName"/>
+		<property name="com.jaspersoft.studio.field.label" value="employeeName"/>
+	</field>
+	<field name="employeeId" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="employeeId"/>
+		<property name="com.jaspersoft.studio.field.label" value="employeeId"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="employee"/>
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="department" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="department"/>
+		<property name="com.jaspersoft.studio.field.label" value="department"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="employee"/>
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="station" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="station"/>
+		<property name="com.jaspersoft.studio.field.label" value="station"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="employee"/>
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="address" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="address"/>
+		<property name="com.jaspersoft.studio.field.label" value="address"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="employee"/>
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="telephone" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="telephone"/>
+		<property name="com.jaspersoft.studio.field.label" value="telephone"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="employee"/>
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="id" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="id"/>
+		<property name="com.jaspersoft.studio.field.label" value="id"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="leave"/>
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="startDate" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.name" value="startDate"/>
+		<property name="com.jaspersoft.studio.field.label" value="startDate"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="leave"/>
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="endDate" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.name" value="endDate"/>
+		<property name="com.jaspersoft.studio.field.label" value="endDate"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="leave"/>
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="requestedDays" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="requestedDays"/>
+		<property name="com.jaspersoft.studio.field.label" value="requestedDays"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="leave"/>
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="remarks" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="remarks"/>
+		<property name="com.jaspersoft.studio.field.label" value="remarks"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="leave"/>
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="status" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="status"/>
+		<property name="com.jaspersoft.studio.field.label" value="status"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="leave"/>
+		<fieldDescription><![CDATA[status can be 0- pending, 1-approved and 2-rejected]]></fieldDescription>
+	</field>
+	<field name="name" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="name"/>
+		<property name="com.jaspersoft.studio.field.label" value="name"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="leave_type"/>
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="approverName" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="approverName"/>
+		<property name="com.jaspersoft.studio.field.label" value="approverName"/>
+	</field>
+	<field name="dateCreated" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.name" value="dateCreated"/>
+		<property name="com.jaspersoft.studio.field.label" value="dateCreated"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="leave"/>
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="dateApproved" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.name" value="dateApproved"/>
+		<property name="com.jaspersoft.studio.field.label" value="dateApproved"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="leave"/>
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<group name="employeeName">
+		<groupExpression><![CDATA[$F{employeeName}]]></groupExpression>
+	</group>
+	<group name="employeeId">
+		<groupExpression><![CDATA[$F{employeeId}]]></groupExpression>
+	</group>
+	<group name="department">
+		<groupExpression><![CDATA[$F{department}]]></groupExpression>
+	</group>
+	<group name="station">
+		<groupExpression><![CDATA[$F{station}]]></groupExpression>
+	</group>
+	<group name="address">
+		<groupExpression><![CDATA[$F{address}]]></groupExpression>
+	</group>
+	<group name="telephone">
+		<groupExpression><![CDATA[$F{telephone}]]></groupExpression>
+	</group>
+	<group name="id">
+		<groupExpression><![CDATA[$F{id}]]></groupExpression>
+	</group>
+	<group name="startDate">
+		<groupExpression><![CDATA[$F{startDate}]]></groupExpression>
+	</group>
+	<group name="endDate">
+		<groupExpression><![CDATA[$F{endDate}]]></groupExpression>
+	</group>
+	<group name="requestedDays">
+		<groupExpression><![CDATA[$F{requestedDays}]]></groupExpression>
+	</group>
+	<group name="remarks">
+		<groupExpression><![CDATA[$F{remarks}]]></groupExpression>
+	</group>
+	<group name="status">
+		<groupExpression><![CDATA[$F{status}]]></groupExpression>
+	</group>
+	<group name="name">
+		<groupExpression><![CDATA[$F{name}]]></groupExpression>
+	</group>
+	<group name="approverName">
+		<groupExpression><![CDATA[$F{approverName}]]></groupExpression>
+	</group>
+	<group name="dateCreated">
+		<groupExpression><![CDATA[$F{dateCreated}]]></groupExpression>
+	</group>
+	<group name="dateApproved">
+		<groupExpression><![CDATA[$F{dateApproved}]]></groupExpression>
+	</group>
+	<title>
+		<band height="79" splitType="Stretch">
+			<frame>
+				<reportElement x="0" y="0" width="555" height="79" uuid="620ebe2e-619e-481d-9918-24f1cbd9120d"/>
+				<staticText>
+					<reportElement x="0" y="0" width="555" height="79" uuid="610ed8d8-aaa9-4955-a0f0-ab51bb8039da"/>
+					<textElement textAlignment="Center" verticalAlignment="Bottom">
+						<font fontName="Arial Narrow" size="20"/>
+					</textElement>
+					<text><![CDATA[Leave Application Form]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</title>
+	<detail>
+		<band height="216" splitType="Stretch">
+			<textField>
+				<reportElement x="266" y="26" width="100" height="30" uuid="c18f4af1-ef79-434c-9d62-7973c04bf083"/>
+				<box>
+					<bottomPen lineWidth="1.0" lineStyle="Dotted"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Bottom"/>
+				<textFieldExpression><![CDATA[$F{employeeId}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement mode="Transparent" x="46" y="46" width="504" height="50" uuid="c3461ead-4ac3-4332-8a69-6fa10593601e"/>
+				<graphicElement>
+					<pen lineWidth="0.0"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="46" y="26" width="100" height="30" uuid="25db4a70-d443-414e-87c2-e20d0a310176"/>
+				<textElement verticalAlignment="Bottom"/>
+				<text><![CDATA[Name]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="106" y="26" width="100" height="30" uuid="3dcd8f4f-7e2a-4899-8d06-de996ad6eda4"/>
+				<box>
+					<pen lineStyle="Dotted"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Bottom"/>
+				<textFieldExpression><![CDATA[$F{employeeName}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="206" y="26" width="100" height="30" uuid="26b0848e-70f6-4d49-aa1c-6ce8dd75078a"/>
+				<textElement verticalAlignment="Bottom"/>
+				<text><![CDATA[Personal No]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="366" y="26" width="100" height="30" uuid="b65f8e89-9d84-49b1-bbc7-0e0044840b64"/>
+				<textElement verticalAlignment="Bottom"/>
+				<text><![CDATA[Department]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="426" y="26" width="100" height="30" uuid="f71af3bc-2a72-494a-805b-fce1f2d5962a"/>
+				<box>
+					<bottomPen lineWidth="1.0" lineStyle="Dotted"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Bottom"/>
+				<textFieldExpression><![CDATA[$F{department}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="446" y="60" width="100" height="30" uuid="6b4e7a3a-774b-4241-a3c4-c41e4f10278f"/>
+				<box>
+					<bottomPen lineWidth="1.0" lineStyle="Dotted"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Bottom"/>
+				<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="386" y="60" width="100" height="30" uuid="7c0d35bf-e27a-4b7f-b1c4-9cc831ec0723"/>
+				<textElement verticalAlignment="Bottom"/>
+				<text><![CDATA[Leave Type]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="286" y="59" width="100" height="30" uuid="b826ab88-73ad-4408-b9e0-1ce4929ec6f4"/>
+				<box>
+					<bottomPen lineWidth="1.0" lineStyle="Dotted"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Bottom"/>
+				<textFieldExpression><![CDATA[$F{requestedDays}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="207" y="58" width="100" height="30" uuid="09d0c7de-6790-4523-b503-ba76e15830c6"/>
+				<textElement verticalAlignment="Bottom"/>
+				<text><![CDATA[Days Requested]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="106" y="57" width="100" height="30" uuid="4632bb0d-80bb-4c24-a5ef-59a1745001b6"/>
+				<box>
+					<bottomPen lineWidth="1.0" lineStyle="Dotted"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Bottom"/>
+				<textFieldExpression><![CDATA[$F{station}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="46" y="57" width="100" height="30" uuid="9a7c89d3-1529-43f2-8a25-e285afe17b90"/>
+				<textElement verticalAlignment="Bottom"/>
+				<text><![CDATA[Station]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="47" y="87" width="100" height="30" uuid="3e9ae7a3-6eed-460a-a89c-0ea9c7aded5c"/>
+				<textElement verticalAlignment="Bottom"/>
+				<text><![CDATA[Start Date]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="107" y="87" width="100" height="30" uuid="98c86252-0668-499e-9daa-02a03ad7a4cd"/>
+				<box>
+					<bottomPen lineWidth="1.0" lineStyle="Dotted"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Bottom"/>
+				<textFieldExpression><![CDATA[new SimpleDateFormat("dd-MMM-yyy").format($F{startDate})]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="206" y="86" width="100" height="30" uuid="4551a73d-502a-4787-91c4-33eab7552e5b"/>
+				<textElement verticalAlignment="Bottom"/>
+				<text><![CDATA[End Date]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="266" y="86" width="100" height="30" uuid="2a3afddc-fbef-4368-8c79-01d728f731f4"/>
+				<box>
+					<bottomPen lineWidth="1.0" lineStyle="Dotted"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Bottom"/>
+				<textFieldExpression><![CDATA[new SimpleDateFormat("dd-MMM-yyy").format($F{endDate})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="369" y="131" width="100" height="30" uuid="8aef5e2b-9ff7-4697-9e6b-7dc9dd3f4cab"/>
+				<box>
+					<bottomPen lineWidth="1.0" lineStyle="Dotted"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Bottom"/>
+				<textFieldExpression><![CDATA[$F{telephone}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="270" y="130" width="100" height="30" uuid="f5b0c22f-0db8-4ab3-8e20-be2774e63703"/>
+				<textElement verticalAlignment="Bottom"/>
+				<text><![CDATA[Telephone Number]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="169" y="129" width="100" height="30" uuid="e043a281-3190-4348-a66c-2e9661ee3e94"/>
+				<box>
+					<bottomPen lineWidth="1.0" lineStyle="Dotted"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Bottom"/>
+				<textFieldExpression><![CDATA[$F{address}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="45" y="128" width="123" height="30" uuid="5fa9f680-1c0d-411e-b0b5-49ff2407e4c8"/>
+				<textElement verticalAlignment="Bottom"/>
+				<text><![CDATA[Address while on leave]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="44" y="170" width="100" height="30" uuid="81f209b6-a59a-4280-934d-e4fc0a4d1f86"/>
+				<textElement verticalAlignment="Bottom"/>
+				<text><![CDATA[Signature]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="218" y="170" width="100" height="30" uuid="c942fa10-150d-43bf-891b-84b89aace596"/>
+				<textElement verticalAlignment="Bottom"/>
+				<text><![CDATA[Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="112" y="170" width="100" height="30" uuid="2c92c467-ba1e-4b1a-b7f8-f27f188c5d5a"/>
+				<box>
+					<bottomPen lineWidth="1.0" lineStyle="Dotted"/>
+				</box>
+				<textElement verticalAlignment="Bottom"/>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="280" y="170" width="100" height="30" uuid="2eba4f35-144e-41cf-9ff9-1cb784ed0c9f"/>
+				<box>
+					<bottomPen lineWidth="1.0" lineStyle="Dotted"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Bottom"/>
+				<textFieldExpression><![CDATA[new SimpleDateFormat("dd-MMM-yyyy").format($F{dateCreated})]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="5" y="0" width="39" height="216" uuid="eef7dac1-48d7-4b27-bde5-57c32db94c7a"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" rotation="Left"/>
+				<text><![CDATA[A: LEAVE APLLICATION (TO BE COMPLETED BY APPLICANT]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement mode="Transparent" x="0" y="0" width="555" height="216" uuid="5e805c5a-738c-488f-91cc-29cc694a08d1"/>
+			</rectangle>
+		</band>
+		<band height="218">
+			<staticText>
+				<reportElement x="47" y="16" width="151" height="30" uuid="b96703de-d56c-4d25-8744-efd0a51f83d3"/>
+				<textElement verticalAlignment="Bottom"/>
+				<text><![CDATA[Recommended Mr/Mrs/Miss/Ms]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="199" y="16" width="130" height="30" uuid="62b1f3de-6b2e-4ffb-8c5f-dcddd6d3f8ce"/>
+				<box>
+					<bottomPen lineWidth="1.0" lineStyle="Dotted"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Bottom"/>
+				<textFieldExpression><![CDATA[$F{remarks}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="337" y="16" width="189" height="30" uuid="5d096aac-5dc3-4b0e-9064-2a022a2c602d"/>
+				<textElement verticalAlignment="Bottom"/>
+				<text><![CDATA[will be in charge in his/her absence.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="47" y="76" width="100" height="30" uuid="e35af9a5-5dd6-4985-8b9e-acdbe8485841"/>
+				<textElement verticalAlignment="Bottom"/>
+				<text><![CDATA[Supervisor's Name]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="147" y="76" width="100" height="30" uuid="ee19f7e6-9a2f-49be-beb2-ca473231b8d6"/>
+				<box>
+					<bottomPen lineWidth="1.0" lineStyle="Dotted"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Bottom"/>
+				<textFieldExpression><![CDATA[$F{approverName}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="46" y="116" width="100" height="30" uuid="f446f8c3-43bb-4e4b-841e-9f8c3b09e72e"/>
+				<textElement verticalAlignment="Bottom"/>
+				<text><![CDATA[Signature]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="146" y="116" width="100" height="30" uuid="de6c4a50-56e2-4596-af7a-f641cc69a3fd"/>
+				<box>
+					<bottomPen lineWidth="1.0" lineStyle="Dotted"/>
+				</box>
+				<textElement verticalAlignment="Bottom"/>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="249" y="116" width="100" height="30" uuid="464d0f12-f919-4431-8a13-93195de18ebd"/>
+				<textElement verticalAlignment="Bottom"/>
+				<text><![CDATA[Date]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="299" y="116" width="100" height="30" uuid="40108973-d3cc-4c92-9aa0-fdcccca66d8d"/>
+				<box>
+					<bottomPen lineWidth="1.0" lineStyle="Dotted"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Bottom"/>
+				<textFieldExpression><![CDATA[new SimpleDateFormat("dd-MMM-yyyy").format($F{dateApproved})]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="5" y="0" width="39" height="218" uuid="de9825b9-4bc8-4302-89b5-bff86e2e1cf3"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" rotation="Left"/>
+				<text><![CDATA[B: SUPERVISOR'S RECOMMENDATION]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement mode="Transparent" x="0" y="0" width="555" height="218" uuid="aef70685-22be-42cf-b271-defd156b6149"/>
+			</rectangle>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<textField>
+				<reportElement x="227" y="18" width="100" height="30" uuid="402e1aab-1ba7-44ca-9c8f-5208e0e39cc1"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

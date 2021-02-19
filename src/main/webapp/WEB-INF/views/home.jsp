@@ -20,35 +20,58 @@
 	integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
 	crossorigin="anonymous"></script>
 
-<link href="<c:url value="/resources/css/main.css" />" rel="stylesheet">
-<script src="<c:url value="/resources/js/jquery.1.10.2.min.js" />"></script>
+<link href="<c:url value="/resources/css/style.css" />" rel="stylesheet">
+
 <script src="<c:url value="/resources/js/main.js" />"></script>
 
 
 </head>
 <body>
-
-	<div class="container-fluid"
-		style="height: 100vh; background-color: black;">
-		
-
+	<div class="loading justify-content-center" style="display: none;">
+		<div
+			style="margin: auto; text-align: center; display: flex; height: 100%; align-items: center; justify-content: center; width: 50%;">
+			<img alt="bzzzzzzzzz"
+				src='<c:url value="/resources/images/loading.gif" />'
+				style="width: 100px">
+		</div>
 
 
 	</div>
-	<div class="container-fluid">
-        <div class="row navigation">
-			<jsp:include page="nav.jsp"></jsp:include>
-            
-        </div>
-        <div class="row introduction justify-content-center">
-            <div class="employeeform" onload=""><input type="text" id="fname" name="fname"><br><br></div>
-            
 
+	<c:if test="${loginAttempt == 'Failed'}">
+		<script type="text/javascript">
+			$(function() {
 
-        </div>
+				document.getElementById('btnLogin').click();
 
-    </div>
+			});
+		</script>
+	</c:if>
+	<c:choose>
+		<c:when test="${loggedIn!=null}">
 
+			<div onload="location.href='approve'"></div>
+			<c:redirect url="approve"></c:redirect>
+		</c:when>
+		<c:otherwise>
+			<div class="container-fluid">
+				<div class="row navigation">
+					<jsp:include page="nav.jsp"></jsp:include>
+
+				</div>
+
+				<div class="row introduction justify-content-center">
+
+					<div class="employeeform justify-content-center" onload="">
+						<jsp:include page="popup.jsp"></jsp:include>
+
+					</div>
+
+				</div>
+
+			</div>
+		</c:otherwise>
+	</c:choose>
 
 
 

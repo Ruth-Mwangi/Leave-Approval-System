@@ -11,6 +11,6 @@ public interface ApproverDao {
 	
 	public int getApproverByName(String name);
 	
-	public List<LeaveRequest> getApproversRequests(int id);
+	public List<LeaveRequest> getApproversRequests(int id,Integer status);
 
 }

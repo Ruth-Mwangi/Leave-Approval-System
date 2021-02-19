@@ -21,40 +21,48 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
 	integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
 	crossorigin="anonymous"></script>
+<link href="<c:url value="/resources/css/style.css" />" rel="stylesheet">
+
+<script src="<c:url value="/resources/js/main.js" />"></script>
 
 </head>
 <body>
-	<div class="container-fluid">
-		<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
 
 
-			<div class="collapse navbar-collapse" id="navbarSupportedContent">
-				<ul class="navbar-nav mr-auto">
-					<li class="nav-item "><a class="nav-link" href="#">Home </a></li>
-					<li class="nav-item"><a class="nav-link" href="popup.jsp">Apply
-							for Leave</a></li>
-
-					<li class="nav-item"><a class="nav-link" href="#">View
-							Leaves</a></li>
-					<li class="nav-item"><a class="nav-link" href="register">Register</a>
-					</li>
-				</ul>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
 
 
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item "><a class="nav-link" href="home">Home
+				</a></li>
+
+				<li class="nav-item"><a class="nav-link" href="register">Register</a>
+				</li>
+			</ul>
+
+			<c:if test="${loggedIn=='True'}">
+				<button class="btn btn-danger my-2 my-sm-0" type="submit"
+					style="margin-left: 10px" onclick="location.href='signout'">Sign
+					Out</button>
+			</c:if>
+			<c:if test="${loggedIn==null}">
 				<button class="btn btn-success my-2 my-sm-0" type="submit"
-					style="margin-left: 10px" data-toggle="modal"
+					id="btnLogin" style="margin-left: 10px" data-toggle="modal"
 					data-target="#loginModal">Log In</button>
+			</c:if>
 
-			</div>
-		</nav>
-		<!-- Modal -->
+
+		</div>
+	</nav>
+	<!-- Modal -->
 
 	<div class="modal fade" id="loginModal" tabindex="-1" role="dialog"
 		aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">Login</h5>
+					<h5 class="modal-title" id="exampleModalLabel">Approvers Login</h5>
 					<button type="button" class="close" data-dismiss="modal"
 						aria-label="Close">
 						<span aria-hidden="true">&times;</span>
@@ -63,37 +71,42 @@
 				<form action="login" method="POST">
 
 					<div class="modal-body">
-						<div class="form-group">
-							<label for="username">User Name</label> <input
-								type="text" class="form-control" id="username" placeholder="Enter username" name="username">
-							
-						</div>
-						<c:if test="${loginSuccess=='False'}">
-						<p>Login not successful</p>
+						<c:if test="${loginAttempt=='Failed'}">
+
+							<p class="text-danger">Login not successful</p>
+
+
 						</c:if>
-						
 						<div class="form-group">
-							<label for="pasword">Password</label> <input
-								type="password" class="form-control" id="password" name="password"
+							<label for="username">User Name</label> <input type="text"
+								class="form-control" id="username" placeholder="Enter username"
+								name="username">
+
+						</div>
+
+
+						<div class="form-group">
+							<label for="pasword">Password</label> <input type="password"
+								class="form-control" id="password" name="password"
 								placeholder="Password">
 						</div>
-						
+
 					</div>
 					<div class="modal-footer">
-						
+
 						<button type="submit" class="btn btn-primary">Login</button>
 						<button type="button" class="btn btn-secondary"
 							data-dismiss="modal">Close</button>
 					</div>
 				</form>
 			</div>
-			</div>
-			</div>
-
-	
-		
+		</div>
 	</div>
-	
+
+
+
+
+
 
 
 

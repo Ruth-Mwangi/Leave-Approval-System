@@ -1,0 +1,79 @@
+@charset "ISO-8859-1";
+.container-fluid{
+    background-color: beige;
+    height: 100vh;
+    width: 100vw;
+    overflow: auto;
+     
+}
+
+.navigation{
+    width:100vw;
+    height: 10%;
+}
+.navbar{
+    width: 100%;
+}
+.introduction{
+    height:90%;
+    width:100vw;
+}
+.approver{
+    height: 90%;
+    
+
+}
+
+.loading{
+	position:absolute;
+	height: 100vh;
+	width: 100vw;
+	background-color: rgba(0,0,0,0.75);
+}
+.approver-menu{
+    
+    height: 100%;
+    
+}
+.approver-content{
+    padding: 10px;
+}
+.btn{
+     margin-top: 20px;
+}
+.employeeform{
+    margin: auto;
+}
+.approver-content-main{
+    overflow: auto;
+    padding-top: 20px;
+   
+
+
+}
+@media (min-width:356px) {
+      .card-columns {
+        column-count: 4;
+      }
+  }
+
+  @media (min-width:576px) {
+      .card-columns {
+        column-count: 4;
+      }
+  }
+    @media (min-width:768px) {
+      .card-columns {
+        column-count: 4;
+      }
+  }
+  @media (min-width:992px) {
+      .card-columns {
+        column-count: 4;
+      }
+  }
+  @media (min-width:1200px) {
+      .card-columns {
+        column-count: 4;
+      }
+  }

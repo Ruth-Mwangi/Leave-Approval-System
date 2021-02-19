@@ -13,11 +13,72 @@ public class LeaveRequest {
 	private Integer requestedDays;
 	private String remarks;
 	private Employee employee;
-	private Leave leaveName;
+	private Leave leaveType;
+	private String approverName;
+	private String leaveName;
 	
 	
 	
 	
+	public LeaveRequest(Integer id, String dateCreated, String dateApproved, String startDate, String endDate,
+			Integer status, Integer requestedDays, String remarks, String approverName, String leaveName) {
+		super();
+		this.id = id;
+		this.dateCreated = dateCreated;
+		this.dateApproved = dateApproved;
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.status = status;
+		this.requestedDays = requestedDays;
+		this.remarks = remarks;
+		this.approverName = approverName;
+		this.leaveName = leaveName;
+	}
+	
+
+	public LeaveRequest(Integer id, String employeeId, String dateCreated, String startDate, String endDate,
+			Integer status, Integer requestedDays) {
+		
+		this.id = id;
+		this.employeeId = employeeId;
+		this.dateCreated = dateCreated;
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.status = status;
+		this.requestedDays = requestedDays;
+	}
+
+
+	public LeaveRequest(Integer id,String dateApproved, String startDate, String endDate, Integer requestedDays, String remarks,
+			String approverName, String leaveName,Integer status) {
+		this.id=id;
+		this.dateApproved = dateApproved;
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.requestedDays = requestedDays;
+		this.remarks = remarks;
+		this.approverName = approverName;
+		this.leaveName = leaveName;
+		this.status = status;
+	}
+
+	public LeaveRequest(Integer id, String remarks) {
+		super();
+		this.id = id;
+		this.remarks = remarks;
+	}
+
+	public LeaveRequest(Integer id, String employeeId, String dateCreated, String startDate, String endDate,
+			Integer requestedDays) {
+		super();
+		this.id = id;
+		this.employeeId = employeeId;
+		this.dateCreated = dateCreated;
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.requestedDays = requestedDays;
+	}
+
 	public LeaveRequest(String employeeId, String dateCreated, String startDate, String endDate,
 			Integer requestedDays) {
 		this.employeeId = employeeId;
@@ -85,12 +146,12 @@ public class LeaveRequest {
 		this.employee = employee;
 	}
 
-	public Leave getLeaveName() {
-		return leaveName;
+	public Leave getLeaveType() {
+		return leaveType;
 	}
 
-	public void setLeaveName(Leave leaveName) {
-		this.leaveName = leaveName;
+	public void setLeaveType(Leave leaveType) {
+		this.leaveType = leaveType;
 	}
 
 	public Integer getId() {
@@ -138,6 +199,25 @@ public class LeaveRequest {
 	public String getEndDate() {
 		return endDate;
 	}
+	
+	public String getApproverName() {
+		return approverName;
+	}
+
+	public void setApproverName(String approverName) {
+		this.approverName = approverName;
+	}
+
+	public String getLeaveName() {
+		return leaveName;
+	}
+
+	public void setLeaveName(String leaveName) {
+		this.leaveName = leaveName;
+	}
+
+	
+
 	public void setEndDate(String endDate) {
 		this.endDate = endDate;
 	}

@@ -83,4 +83,75 @@ public class LeaveRequestDaoImpl implements LeaveRequestDao {
 		session.close();
 	}
 
+	@Override
+	public void approveLeave(LeaveRequest leaveRequest) {
+		boolean status = false;
+		openSession();
+		
+		
+		try {
+			
+			session.update("LeaveRequest.approveLeave",leaveRequest);
+			System.out.println("Approved Successfully");
+			commitSession();
+			closeSession();
+			
+
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			closeSession();
+		}
+		
+		
+	}
+
+	@Override
+	public void rejectLeave(LeaveRequest leaveRequest) {
+		boolean status = false;
+		openSession();
+		
+		
+		try {
+			
+			session.update("LeaveRequest.rejectLeave",leaveRequest);
+			System.out.println("Rejected Successfully");
+			commitSession();
+			closeSession();
+			
+
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			closeSession();
+		}
+		
+		
+	}
+
+	@Override
+	public Employee getLeaveById(String employeeId, String leaveId) {
+		// TODO Auto-generated method stub
+		Employee employeeRequest=null;
+		Map<String, String> map=new HashMap<String, String>();
+		map.put("employeeId", employeeId);
+		map.put("leaveId", leaveId);
+		openSession();
+		
+		
+		try {
+			
+			employeeRequest=session.selectOne("LeaveRequest.getLeaveById",map);
+			commitSession();
+			closeSession();
+			
+
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			closeSession();
+		}
+		return employeeRequest;
+	}
+
 }

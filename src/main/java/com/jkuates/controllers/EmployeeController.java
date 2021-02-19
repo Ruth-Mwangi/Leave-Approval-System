@@ -3,6 +3,7 @@ package com.jkuates.controllers;
 
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -38,30 +39,37 @@ public class EmployeeController {
 		String  employeeId=request.getParameter("employee_id");
 		
 		Employee employee=employeeDao.getEmployeeById(employeeId);
+		Employee employeeLeaveRequests;
 		session.setAttribute("employee", employee);
 		List<Leave> leaveType=leaveTypeDao.getAllLeaveTypes();
+		session.removeAttribute("loginAttempt");
 		if(employee==null) {
-			mv.setViewName("popup.jsp");
-			mv.addObject("employeeFound", "Fail");
+			mv.setViewName("home.jsp");
+			
+			request.getSession().setAttribute("employeeFound", "Fail");
 	
 			
 			System.out.println("no employee");
 		}
 		else {
-			mv.addObject("employeeId", employeeId);
+			employeeLeaveRequests=employeeDao.getEmployeeLeaveRequests(employeeId, null);
+			request.getSession().setAttribute("employeeId", employeeId);
+			request.getSession().setAttribute("employeeRequests", employeeLeaveRequests);
 			mv.addObject("leaveTypes", leaveType);
 			mv.setViewName("leave.jsp");
 			request.getSession().setAttribute("employee", employee);
+			session.removeAttribute("employeeFound");
 			System.out.println("many employee");
 			
 		}
+		
 		return mv;
 		
 	}
 	
 	@RequestMapping("/save-employee")
 	public ModelAndView insertEmployee(@ModelAttribute("Employee")Employee employee, 
-		      BindingResult result) {
+		      BindingResult result,HttpSession session) {
 //		String  employeeId=request.getParameter("employee_id");
 		Employee newEmployee=employee;
 		boolean status=false;
@@ -73,9 +81,14 @@ public class EmployeeController {
 		else {
 			status=employeeDao.insertEmployee(newEmployee);
 			if(status==true) {
-				mv.setViewName("index.jsp");
+				session.removeAttribute("employeeFound");
+				mv.setViewName("home.jsp");
+				
 			}
 			else {
+				System.out.println("was saving successful? nope");
+				session.removeAttribute("employeeFound");
+				mv.addObject("registrationStatus","Failed");
 				mv.setViewName("register.jsp");
 				
 			}
@@ -91,10 +104,38 @@ public class EmployeeController {
 	@RequestMapping("/register")
 	public ModelAndView register(@ModelAttribute("Employee")Employee employee) {
 //		String  employeeId=request.getParameter("employee_id");
+		mv.addObject("registrationStatus", "Starting");
 		mv.setViewName("register.jsp");
+	
 		return mv;
 		
 	}
+	@RequestMapping("/home")
+	public ModelAndView goHome(HttpSession session) {
+//		String  employeeId=request.getParameter("employee_id");
+		
+		session.removeAttribute("employeeFound");
+		mv.setViewName("home.jsp");
+		
+		return mv;
+		
+	}
+	@RequestMapping("/employee-requests")
+	public ModelAndView getEmployeeRequests(HttpServletRequest request,HttpServletResponse response,HttpSession session,@ModelAttribute("LeaveRequest")LeaveRequest leave, 
+		      BindingResult result) {
+		Employee employeeLeaveRequests;
+		String employeeId=request.getParameter("employeeId");
+		String status= request.getParameter("status") ;
+		employeeLeaveRequests=employeeDao.getEmployeeLeaveRequests(employeeId, status);
+		request.getSession().setAttribute("employeeId", employeeId);
+		request.getSession().setAttribute("employeeRequests", employeeLeaveRequests);
+		
+		mv.setViewName("leave.jsp");
+		return mv;
+		
+	}
+	
+	
 	
 
 }

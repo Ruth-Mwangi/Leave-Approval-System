@@ -5,20 +5,68 @@
 
 
 	<resultMap type='LeaveRequest' id='LeaveRequestResult'>
-
+		<id column="id" property="id" />
 		<result column="employeeId" property="employeeId" />
 		<result column="dateCreated" property="dateCreated" />
 		<result column="startDate" property="startDate" />
 		<result column="endDate" property="endDate" />
 		<result column="requestedDays" property="requestedDays" />
+		<result column="status" property="status"/>
 		<association property="employee" resultMap="EmployeeMap">
 
 		</association>
-		<association property="leaveName" resultMap="LeaveMap">
-			
+		<association property="leaveType" resultMap="LeaveMap">
+
 
 		</association>
 
+	</resultMap>
+	<resultMap type='Employee' id='EmployeeLeaveRequestResult'>
+
+		<result column="employeeName" property="employeeName" />
+		<result column="employeeId" property="employeeId" />
+		<result column="department" property="department" />
+		<result column="station" property="station" />
+		<result column="address" property="address" />
+		<result column="telephone" property="telephone" />
+		<collection property="requests" ofType="LeaveRequest">
+			<id column="id" property="id"/>
+			<result column="startDate" property="startDate"/>
+			<result column="endDate" property="endDate"/>
+			<result column="requestedDays" property="requestedDays"/>
+			<result column="remarks" property="remarks"/>
+			<result column="name" property="leaveName"/>
+			<result column="approverName" property="approverName"/>
+			<result column="dateApproved" property="dateApproved"/>
+			<result column="status" property="status"/>
+
+		</collection>
+
+
+	</resultMap>
+	<resultMap type='Employee' id='LeaveRequestByIdResult'>
+
+		<result column="employeeName" property="employeeName" />
+		<result column="employeeId" property="employeeId" />
+		<result column="department" property="department" />
+		<result column="station" property="station" />
+		<result column="address" property="address" />
+		<result column="telephone" property="telephone" />
+		<association property="request" resultMap="LeaveByIdAssociation"></association>
+
+
+	</resultMap>
+	<resultMap type="LeaveRequest" id="LeaveByIdAssociation">
+			<id column="id" property="id"/>
+			<result column="startDate" property="startDate"/>
+			<result column="endDate" property="endDate"/>
+			<result column="requestedDays" property="requestedDays"/>
+			<result column="remarks" property="remarks"/>
+			<result column="name" property="leaveName"/>
+			<result column="approverName" property="approverName"/>
+			<result column="dateApproved" property="dateApproved"/>
+			<result column="status" property="status"/>
+			<result column="dateCreated" property="dateCreated"/>
 	</resultMap>
 	<resultMap type="Employee" id="EmployeeMap">
 		<result property="fname" column="fname" />
@@ -48,9 +96,9 @@
 	</select>
 
 	<select id="getLeaveRequestsForApprover"
-		resultMap="LeaveRequestResult" parameterType="int">
+		resultMap="LeaveRequestResult" parameterType="java.util.Map">
 		SELECT
-		l.employeeId,l.dateCreated,l.startDate,l.endDate,l.requestedDays,e.fname,e.lname,lt.name
+		l.id,l.employeeId,l.dateCreated,l.startDate,l.endDate,l.requestedDays,e.fname,e.lname,lt.name,l.status
 		FROM
 		leave_approval.leave AS l
 		INNER JOIN
@@ -61,9 +109,71 @@
 		leave_approval.leave_type as lt
 		ON
 		l.leaveTypeId=lt.id
-		WHERE status=0
-		AND
-		approverId=#{id}
+		<where>
+		<if test="approverId != null">approverId=#{approverId}</if>
+		<if test="status!=null">
+		AND status=#{status}
+		</if>
+		</where>
+		
+		
+		
+	</select>
+
+	<update id="approveLeave" parameterType="LeaveRequest">
+		UPDATE
+		leave_approval.leave SET
+		dateApproved=now(),status=1,remarks=#{remarks} where id=#{id}
+	</update>
+	<update id="rejectLeave" parameterType="LeaveRequest">
+		UPDATE
+		leave_approval.leave SET
+		dateApproved=now(),status=2,remarks=#{remarks} where id=#{id}
+	</update>
+	<select id="getLeaveRequestsForEmployee" parameterType="java.util.Map"
+		resultMap="EmployeeLeaveRequestResult">
+		SELECT 
+		CONCAT( e.fname," ",e.lname) as
+		employeeName,e.employeeId,e.department,
+		e.station,e.address,e.telephone,l.id,l.startDate,
+		l.endDate,l.requestedDays,l.remarks,l.status,lt.name,
+		CONCAT(a.fname," ",a.lname) as approverName,l.dateApproved
+		FROM 
+		leave_approval.employee as e 
+		inner join
+		leave_approval.leave as l on e.employeeId=l.employeeId 
+		inner join
+		leave_approval.leave_type as lt on lt.id=l.leaveTypeId 
+		inner join
+		leave_approval.approver as a on a.id=l.approverId 
+		<where>
+		<if test="employeeId != null">
+			e.employeeId=#{employeeId}
+		</if>
+		<if test="status != null">
+			AND l.status=#{status,jdbcType=INTEGER}
+		</if>
+		</where>
+		
+	</select>
+	<select id="getLeaveById" parameterType="java.util.Map"
+		resultMap="LeaveRequestByIdResult">
+		SELECT 
+		CONCAT( e.fname," ",e.lname) as
+		employeeName,e.employeeId,e.department,
+		e.station,e.address,e.telephone,l.id,l.startDate,
+		l.endDate,l.requestedDays,l.remarks,l.status,lt.name,
+		CONCAT(a.fname," ",a.lname) as approverName,l.dateCreated,l.dateApproved
+		FROM 
+		leave_approval.employee as e 
+		inner join
+		leave_approval.leave as l on e.employeeId=l.employeeId 
+		inner join
+		leave_approval.leave_type as lt on lt.id=l.leaveTypeId 
+		inner join
+		leave_approval.approver as a on a.id=l.approverId 
+		WHERE l.employeeId=#{employeeId} AND l.id=#{leaveId,jdbcType=INTEGER}
+		
 	</select>
 
 
