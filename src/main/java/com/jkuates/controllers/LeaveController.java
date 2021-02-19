@@ -114,6 +114,8 @@ public class LeaveController {
 			@ModelAttribute("LeaveRequest") LeaveRequest leave, BindingResult result, HttpSession session) {
 		boolean status = leaveRequestDao.saveLeaveRequest(leave);
 		System.out.println(status);
+		mv.addObject("applicationProcess","False");
+		mv.addObject("isLeaveSelected", "False");
 		mv.setViewName("leave.jsp");
 		return mv;
 

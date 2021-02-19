@@ -149,58 +149,22 @@
 							</div>
 							<hr>
 							<div class="form-row">
-								<c:choose>
-									<c:when test="${isLeaveSelected=='True'}">
-
-										<c:forEach items="${leaveTypes}" var="leaveType">
-											<c:choose>
-												<c:when test="${leaveType.id==selectedLeave}">
-													<div class="form-group col-md-2">
-
-														<input type="radio" value="${leaveType.id}"
-															onclick="location.href='apply-for-leave?leaveId=${leaveType.id}&leaveName=${leaveType.name}&leaveDays=${leaveType.days}'"
-															name="leave" checked="checked" data-toggle="tooltip"
-															data-placement="bottom"
-															title="${leaveType.leaveDescription}"> <label
-															for="leave">${leaveType.name}</label>
-
-													</div>
-
-												</c:when>
-												<c:otherwise>
-													<div class="form-group col-md-2">
-
-														<input type="radio" value="${leaveType.id}"
-															onclick="location.href='apply-for-leave?leaveId=${leaveType.id}&leaveName=${leaveType.name}&leaveDays=${leaveType.days}'"
-															name="leave" data-toggle="tooltip"
-															data-placement="bottom"
-															title="${leaveType.leaveDescription}"> <label
-															for="leave">${leaveType.name}</label>
-
-													</div>
-												</c:otherwise>
-											</c:choose>
-
-										</c:forEach>
-									</c:when>
-									<c:otherwise>
+								
 
 										<c:forEach items="${leaveTypes}" var="leaveType">
 											<div class="form-group col-md-2">
 
 												<input type="radio" value="${leaveType.id}"
 													onclick="location.href='apply-for-leave?leaveId=${leaveType.id}&leaveName=${leaveType.name}&leaveDays=${leaveType.days}'"
-													name="leave" data-toggle="tooltip" data-placement="bottom"
-													title="${leaveType.leaveDescription}"> <label
+													name="leave" data-toggle="tooltip" data-placement="bottom" <c:if test="${isLeaveSelected=='True' and leaveType.id==selectedLeave}">checked="checked"</c:if>
+													title="${leaveType.leaveDescription}"  > <label
 													for="leave">${leaveType.name}</label>
 
 
 											</div>
 
 										</c:forEach>
-									</c:otherwise>
-
-								</c:choose>
+									
 
 							</div>
 							<hr>
