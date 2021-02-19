@@ -291,7 +291,7 @@
 										placeholder="" onkeyup="checkValue(${remainingLeaveDays})" />
 								</div>
 								<div class="form-group col-md-6">
-									<form:label path="approverId">Days requesting</form:label>
+									<form:label path="approverId">Approver Name</form:label>
 									<form:select path="approverId" class="form-control">
 										<c:forEach items="${approvers}" var="approver">
 											<form:option value="${approver.id}">${approver.fname} ${approver.lname}</form:option>

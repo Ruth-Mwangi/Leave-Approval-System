@@ -147,7 +147,7 @@
 
 						</div>
 
-						<div class="form-group">
+						<div class="form-group"  style="display: none;">
 
 							<input type="number" class="form-control" id="approveId"
 								name="id" />
@@ -187,7 +187,7 @@
 
 						</div>
 
-						<div class="form-group">
+						<div class="form-group" style="display: none;">
 
 							<input type="number" class="form-control" id="rejectId" name="id" />
 						</div>
